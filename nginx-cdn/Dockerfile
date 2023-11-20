@@ -2,6 +2,7 @@ FROM ghcr.io/alwatr/nginx-core:1.1.1
 
 # Default environment for nginx template
 ENV NGINX_CLIENT_MAX_BODY_SIZE=1k \
+    NGINX_ETAG=on \
     NGINX_SENDFILE=on \
     NGINX_SENDFILE_MAX_CHUNK=2m \
     NGINX_TCP_NOPUSH=on \
