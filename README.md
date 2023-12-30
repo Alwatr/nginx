@@ -7,14 +7,14 @@ This is a high-performance version of NGINX, which has been enhanced by Alwatr f
 The recommended method for using the Alwatr Nginx is to place it behind a Kubernetes ingress or a simple edge reverse-proxy like Traefik. In this setup, there's no need to configure edge features such as gzip compression, SSL, etc., or even set up a domain or multiple websites.
 
 ```Dockerfile
-FROM ghcr.io/alwatr/nginx:1
+FROM ghcr.io/alwatr/nginx:2
 ```
 
 ### Serve Progressive Web Apps
 
 ```Dockerfile
 ARG NODE_VERSION=lts
-ARG ALWATR_NGINX_VERSION=1
+ARG ALWATR_NGINX_VERSION=2
 FROM docker.io/library/node:${NODE_VERSION} as builder
 WORKDIR /app
 COPY package.json *.lock ./
@@ -28,7 +28,7 @@ RUN yarn build
 
 # ---
 
-FROM ghcr.io/alimd/nginx-pwa:${ALWATR_NGINX_VERSION} as nginx
+FROM ghcr.io/alwatr/nginx-pwa:${ALWATR_NGINX_VERSION} as nginx
 # Config nginx
 ENV NGINX_ACCESS_LOG="/var/log/nginx/access.log json"
 # Copy builded files from last stage
