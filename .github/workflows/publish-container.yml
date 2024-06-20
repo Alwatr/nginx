@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: ⤵️ Checkout repository
-        uses: actions/checkout@v4.1.5
+        uses: actions/checkout@v4.1.7
 
       - name: ❔ Check Container files changed
         id: file_change
@@ -72,14 +72,14 @@ jobs:
 
       - name: 🏗 Log into docker hub registry
         if: ${{ github.event_name != 'pull_request' && steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/login-action@v3.1.0
+        uses: docker/login-action@v3.2.0
         with:
           username: ${{env.USER}}
           password: ${{secrets.DOCKER_HUB_TOKEN}}
 
       - name: 🏗 Log into ghcr.io registry
         if: ${{ github.event_name != 'pull_request' && steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/login-action@v3.1.0
+        uses: docker/login-action@v3.2.0
         with:
           registry: ghcr.io
           username: ${{env.USER}}
@@ -102,7 +102,7 @@ jobs:
 
       - name: 🚀 Build and export to docekr
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/build-push-action@v5.3.0
+        uses: docker/build-push-action@v6.0.2
         with:
           context: ./${{matrix.path}}
           push: false
@@ -122,7 +122,7 @@ jobs:
 
       - name: 🚀 Build and publish container image
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/build-push-action@v5.3.0
+        uses: docker/build-push-action@v6.0.2
         with:
           context: ./${{matrix.path}}
           push: ${{ github.event_name != 'pull_request' }}
