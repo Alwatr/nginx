@@ -102,7 +102,7 @@ jobs:
 
       - name: 🚀 Build and export to docekr
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/build-push-action@v6.3.0
+        uses: docker/build-push-action@v6.4.0
         with:
           context: ./${{matrix.path}}
           push: false
@@ -122,7 +122,7 @@ jobs:
 
       - name: 🚀 Build and publish container image
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/build-push-action@v6.3.0
+        uses: docker/build-push-action@v6.4.0
         with:
           context: ./${{matrix.path}}
           push: ${{ github.event_name != 'pull_request' }}
