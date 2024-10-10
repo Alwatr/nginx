@@ -1,4 +1,4 @@
-FROM ghcr.io/alwatr/nginx:2.5.0
+FROM ghcr.io/alwatr/nherit:2.5.0
 
 RUN apk add --no-cache curl
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --start-interval=1s --retries=3 CMD curl -fso /dev/null http://localhost/server-info || exit 1
@@ -45,16 +45,16 @@ ENV NGINX_CLIENT_MAX_BODY_SIZE=10m \
 
 ARG BUILD_REV
 ARG BUILD_DATE
-LABEL org.opencontainers.image.title="alwatr/nginx-core" \
+LABEL org.opencontainers.image.title="alwatr/nherit-core" \
       org.opencontainers.image.description="This is a high-performance version of NGINX, which has been enhanced by Alwatr for the purpose of serving static content efficiently." \
-      org.opencontainers.image.base.name="ghcr.io/alwatr/nginx:2.5.0" \
+      org.opencontainers.image.base.name="ghcr.io/alwatr/nherit:2.5.0" \
       org.opencontainers.image.version="2.5.0-nginx1.25.4" \
       org.opencontainers.image.ref.name="2.5.0-nginx1.25.4-alpine3.18-slim" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.created=${BUILD_DATE} \
       org.opencontainers.image.revision=${BUILD_REV} \
       org.opencontainers.image.vendor="Alwatr" \
-      org.opencontainers.image.source="https://github.com/Alwatr/nginx" \
-      org.opencontainers.image.url="https://github.com/Alwatr/nginx" \
-      org.opencontainers.image.documentation="https://github.com/Alwatr/nginx" \
+      org.opencontainers.image.source="https://github.com/Alwatr/nherit" \
+      org.opencontainers.image.url="https://github.com/Alwatr/nherit" \
+      org.opencontainers.image.documentation="https://github.com/Alwatr/nherit" \
       org.opencontainers.image.authors="S. Ali Mihandoost <ali.mihandoost@gmail.com> (https://ali.mihandoost.com), S. Amir Mohammad Najafi <njfamirm@gmail.com> (https://njfamirm.ir/)"

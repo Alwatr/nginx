@@ -8,7 +8,7 @@ The recommended method for using the Alwatr Nginx is to place it behind a Kubern
 In this setup, there's no need to configure edge features such as SSL, Domain, etc. in the Alwatr Nginx.
 
 ```Dockerfile
-FROM ghcr.io/alwatr/nginx:2
+FROM ghcr.io/alwatr/nherit:2
 ```
 
 ### Serve Progressive Web Apps
@@ -29,7 +29,7 @@ RUN yarn build
 
 # ---
 
-FROM ghcr.io/alwatr/nginx-pwa:${ALWATR_NGINX_VERSION} as nginx
+FROM ghcr.io/alwatr/nherit-pwa:${ALWATR_NGINX_VERSION} as nginx
 # Config nginx
 ENV NGINX_ACCESS_LOG="/var/log/nginx/access.log json"
 # Copy builded files from last stage
