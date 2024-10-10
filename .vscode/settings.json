@@ -11,7 +11,10 @@
   },
   "markdownlint.ignore": ["**/CHANGELOG.md"],
   "cSpell.language": "en,fa,fa-IR",
-  "cSpell.words": ["alwatr"],
+  "cSpell.words": [
+    "alwatr",
+    "nherit"
+  ],
   "git.autoStash": true,
   "githubPullRequests.ignoredPullRequestBranches": ["main", "next"]
 }
