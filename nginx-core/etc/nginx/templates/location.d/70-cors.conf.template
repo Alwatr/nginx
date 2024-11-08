@@ -13,4 +13,4 @@ if ($request_method = 'OPTIONS') {
   add_header 'Content-Length' 0;
 
   return 204;
-}
+
