@@ -1,22 +1,16 @@
-# Method 1: Allow specific origin (Recommended for security)
 add_header 'Access-Control-Allow-Origin' $NGINX_CORS_ORIGIN;
-
-# Allow specific methods (GET, POST, PUT, DELETE, OPTIONS)
 add_header 'Access-Control-Allow-Methods' $NGINX_CORS_METHODS;
-
-# Allow specific headers
 add_header 'Access-Control-Allow-Headers' $NGINX_CORS_HEADERS;
-
-# Cache preflight requests for 24 hours (improves performance)
 add_header 'Access-Control-Max-Age' $NGINX_CORS_MAXAGE;
 
-# Handle OPTIONS requests (preflight requests for complex requests)
 if ($request_method = 'OPTIONS') {
+  # Handle OPTIONS requests (preflight requests for complex requests)
   add_header 'Access-Control-Allow-Origin' $NGINX_CORS_ORIGIN;
   add_header 'Access-Control-Allow-Methods'  $NGINX_CORS_METHODS;
   add_header 'Access-Control-Allow-Headers' $NGINX_CORS_HEADERS;
   add_header 'Access-Control-Max-Age' $NGINX_CORS_MAXAGE;
   add_header 'Content-Type' 'text/plain charset=UTF-8';
   add_header 'Content-Length' 0;
+
   return 204;
 }
