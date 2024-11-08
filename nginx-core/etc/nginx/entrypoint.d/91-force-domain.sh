@@ -1,7 +1,8 @@
 #!/bin/sh
 set -eu
 
-test -n "${TEST_MODE:-}" && exit 0
+# FIXME: nginx: [emerg] invalid condition "$host" in 40-force-domain.conf:1 (its work perfectly in production!)
+# test -n "${TEST_MODE:-}" && exit 0
 test -n "${NGINX_FORCE_DOMAIN:-}" && exit 0
 
 ME=$(basename "$0")
