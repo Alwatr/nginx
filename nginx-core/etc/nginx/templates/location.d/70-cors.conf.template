@@ -14,5 +14,6 @@ location / {
     add_header 'Content-Length' 0;
 
     return 204;
+    break;
   }
 }
