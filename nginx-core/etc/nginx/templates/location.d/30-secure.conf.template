@@ -7,15 +7,15 @@ location ~* (?:\.(?:bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op]|lock)|~)$ {
 }
 
 location ~* \.(pl|cgi|py|sh|lua)$ {
-  return 444;
+  deny all;
 }
 
 location ~* (w00tw00t) {
-  return 444;
+  deny all;
 }
 
 location ~* \.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|\.php_ {
-  return 444;
+  deny all;
 }
 
 location = /robots.txt {
