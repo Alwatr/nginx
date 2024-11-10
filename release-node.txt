@@ -6,3 +6,4 @@ git tag v$new_version -m v$new_version --force --sign
 git push origin v$new_version --force
 gh release create v$new_version --generate-notes
 gh release view -w
+gh workflow view 'Build & Publish Containers'
