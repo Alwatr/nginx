@@ -1,4 +1,4 @@
-FROM ghcr.io/alwatr/nginx:2.5.0
+FROM ghcr.io/alwatr/nginx:3.3.2
 
 RUN apk add --no-cache curl
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --start-interval=1s --retries=3 CMD curl -fso /dev/null http://localhost/server-info || exit 1
@@ -53,9 +53,9 @@ ARG BUILD_REV
 ARG BUILD_DATE
 LABEL org.opencontainers.image.title="alwatr/nginx-core" \
       org.opencontainers.image.description="This is a high-performance version of NGINX, which has been enhanced by Alwatr for the purpose of serving static content efficiently." \
-      org.opencontainers.image.base.name="ghcr.io/alwatr/nginx:2.5.0" \
-      org.opencontainers.image.version="2.5.0-nginx1.27.2" \
-      org.opencontainers.image.ref.name="2.5.0-nginx1.27.2-alpine-slim" \
+      org.opencontainers.image.base.name="ghcr.io/alwatr/nginx:3.3.2" \
+      org.opencontainers.image.version="3.3.2-nginx1.27.2" \
+      org.opencontainers.image.ref.name="3.3.2-nginx1.27.2-alpine-slim" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.created=${BUILD_DATE} \
       org.opencontainers.image.revision=${BUILD_REV} \
