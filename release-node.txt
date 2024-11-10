@@ -1,7 +1,7 @@
 current_version=3.3.2
 new_version=3.3.3
 find . -name 'Dockerfile' -exec sed -i '' "s/$current_version/$new_version/g" {} +
-git commit -am 'release: v$new_version'
+git commit -am "release: v$new_version"
 git push
 git tag v$new_version -m v$new_version --force --sign
 git push origin v$new_version --force
