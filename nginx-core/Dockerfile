@@ -54,8 +54,8 @@ ARG BUILD_DATE
 LABEL org.opencontainers.image.title="alwatr/nginx-core" \
       org.opencontainers.image.description="This is a high-performance version of NGINX, which has been enhanced by Alwatr for the purpose of serving static content efficiently." \
       org.opencontainers.image.base.name="ghcr.io/alwatr/nginx:3.3.3" \
-      org.opencontainers.image.version="3.3.3-nginx1.27.2" \
-      org.opencontainers.image.ref.name="3.3.3-nginx1.27.2-alpine-slim" \
+      org.opencontainers.image.version="3.3.3-nginx1.25.5" \
+      org.opencontainers.image.ref.name="3.3.3-nginx1.25.5-alpine-slim" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.created=${BUILD_DATE} \
       org.opencontainers.image.revision=${BUILD_REV} \
