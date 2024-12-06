@@ -65,7 +65,7 @@ jobs:
 
       - name: 🏗 Cache Docker Layers
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: actions/cache@v4.1.2
+        uses: actions/cache@v4.2.0
         with:
           path: /tmp/.buildx-cache
           key: container/${{ matrix.path }}
@@ -88,7 +88,7 @@ jobs:
       - name: 🏗 Extract metadata
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
         id: meta
-        uses: docker/metadata-action@v5.5.1
+        uses: docker/metadata-action@v5.6.1
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           images: |
@@ -102,7 +102,7 @@ jobs:
 
       - name: 🚀 Build and export to docekr
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/build-push-action@v6.9.0
+        uses: docker/build-push-action@v6.10.0
         with:
           context: ./${{matrix.path}}
           push: false
@@ -122,7 +122,7 @@ jobs:
 
       - name: 🚀 Build and publish container image
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: docker/build-push-action@v6.9.0
+        uses: docker/build-push-action@v6.10.0
         with:
           context: ./${{matrix.path}}
           push: ${{ github.event_name != 'pull_request' }}
