@@ -1,5 +1,5 @@
-current_version=3.4.0
-new_version=3.4.1
+current_version=3.4.1
+new_version=3.5.0
 find . -name 'Dockerfile' -exec sed -i '' "s/$current_version/$new_version/g" {} +
 git commit -am "release: v$new_version"
 git push
