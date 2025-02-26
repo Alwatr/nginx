@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# if $NGINX_RESOLVERS set to local, set it to the local resolvers from /etc/resolv.conf and export it
+
 set -eu
 
 LC_ALL=C
