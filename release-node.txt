@@ -1,12 +1,14 @@
 # Remember: change logs generated from pull requests, do not push hotfix directly to default branch.
 
-current_version=3.6.0
-new_version=3.6.1
+current_version=3.6.1
+new_version=3.7.0
 find . -name 'Dockerfile' -exec sed -i '' "s/$current_version/$new_version/g" {} +
+
 git commit -am "release: v$new_version"
 git push
 git tag v$new_version -m v$new_version --force --sign
 git push origin v$new_version --force
+
 gh release create v$new_version --generate-notes
-gh release view -w
 gh workflow view 'Build & Publish Containers'
+gh release view -w
