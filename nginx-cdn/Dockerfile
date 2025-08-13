@@ -1,4 +1,4 @@
-FROM ghcr.io/alwatr/nginx-core:3.6.0
+FROM ghcr.io/alwatr/nginx-core:3.6.1
 
 # COPY etc/nginx/ /etc/nginx/
 # COPY default-data/ /default-data/
@@ -29,9 +29,9 @@ ARG BUILD_REV
 ARG BUILD_DATE
 LABEL org.opencontainers.image.title="alwatr/nginx-cdn" \
       org.opencontainers.image.description="This is a high-performance version of NGINX, which has been enhanced by Alwatr for the purpose of serving static content efficiently." \
-      org.opencontainers.image.base.name="ghcr.io/alwatr/nginx-core:3.6.0" \
-      org.opencontainers.image.version="3.6.0" \
-      org.opencontainers.image.ref.name="3.6.0-nginx1.27.5-alpine-slim" \
+      org.opencontainers.image.base.name="ghcr.io/alwatr/nginx-core:3.6.1" \
+      org.opencontainers.image.version="3.6.1" \
+      org.opencontainers.image.ref.name="3.6.1-nginx1.27.5-alpine-slim" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.created=${BUILD_DATE} \
       org.opencontainers.image.revision=${BUILD_REV} \
