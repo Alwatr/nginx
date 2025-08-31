@@ -9,7 +9,7 @@ ME="10-local-resolvers.envsh"
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # if $NGINX_RESOLVERS is not set to local, do nothing
-[ "${NGINX_RESOLVERS}" == local ] || return 0
+[ "${NGINX_RESOLVERS:-}" == local ] || return 0
 
 NGINX_RESOLVERS=$(awk 'BEGIN{ORS=" "} $1=="nameserver" {if ($2 ~ ":") {print "["$2"]"} else {print $2}}' /etc/resolv.conf)
 
