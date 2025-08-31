@@ -18,7 +18,7 @@ definedEnvs=$(printf '${%s} ' $(env | cut -d= -f1));
 if [ ! -w "$configJsPath" ];
 then
   echo "$ME: ERROR: $configJsPath exists, but is not writable";
-  return 0
+  exit 1
 fi
 
 echo "$ME: Running envsubst on $configJsPath";
