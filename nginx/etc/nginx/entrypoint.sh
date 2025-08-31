@@ -31,7 +31,7 @@ if [ "$1" = "nginx" ] || [ "$1" = "nginx-debug" ]; then
             "$f"
           else
             # warn on shell scripts without exec bit
-            entrypoint_log "$0: Ignoring $f, not executable";
+            entrypoint_log "$0: Ignoring $f, not executable!";
           fi
           ;;
         *) entrypoint_log "$0: Ignoring $f";;
