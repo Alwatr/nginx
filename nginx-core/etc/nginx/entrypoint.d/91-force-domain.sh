@@ -4,15 +4,12 @@ set -eu
 ME=$(basename "$0")
 
 
-case "${NGINX_FORCE_DOMAIN:-}" in
-  1|true|yes|Yes|on|ON|True|TRUE)
-    echo "$ME: Enable force domain config to '$NGINX_FORCE_DOMAIN'"
-    # keep the file
-    ;;
-  *)
-    echo "$ME: Remove force domain location config"
-    rm -fv /etc/nginx/conf.d/location.d/root.d/30-force-domain.conf
-    ;;
-esac
+if [ -n "${NGINX_FORCE_DOMAIN:-}" ]; then
+  echo "$ME: Enable force domain config to '$NGINX_FORCE_DOMAIN'"
+  # keep the file
+else
+  echo "$ME: Remove force domain location config"
+  rm -fv /etc/nginx/conf.d/location.d/root.d/30-force-domain.conf
+fi
 
 exit 0
