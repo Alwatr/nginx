@@ -4,7 +4,7 @@ set -eu
 
 ME=$(basename "$0")
 
-test -z "${NGINX_ACCESS_LOG:-}" && exit 0
+test -n "${NGINX_ACCESS_LOG:-}" && exit 0
 
 echo "$ME: Generate access log configuration from NGINX_ENABLE_ACCESS_LOG"
 
