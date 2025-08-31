@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -eu
 
 entrypoint_log() {
   if [ -z "${NGINX_ENTRYPOINT_QUIET_LOGS:-}" ]; then
@@ -18,13 +18,8 @@ if [ "$1" = "nginx" ] || [ "$1" = "nginx-debug" ]; then
     find "$entrypointDir" -follow -type f -print | sort -V | while read -r f; do
       case "$f" in
         *.envsh)
-          if [ -x "$f" ]; then
-            entrypoint_log "$0: Sourcing $f";
-            . "$f"
-          else
-            # warn on shell scripts without exec bit
-            entrypoint_log "$0: Ignoring $f, not executable";
-          fi
+          entrypoint_log "$0: Sourcing $f";
+          . "$f"
           ;;
         *.sh)
           if [ -x "$f" ]; then
