@@ -3,6 +3,7 @@ ME='11-access-logs.envsh';
 if test -n "${NGINX_ACCESS_LOG:-}"
 then
   echo "$ME: NGINX_ACCESS_LOG already set to '$NGINX_ACCESS_LOG'";
+  return 0;
 fi
 
 echo "$ME: Generate access log configuration from NGINX_ENABLE_ACCESS_LOG";
