@@ -1,4 +1,4 @@
-FROM docker.io/library/nginx:1.29.0-alpine-slim
+FROM docker.io/library/nginx:1.29.1-alpine-slim
 
 RUN rm -rfv /docker-entrypoint* /etc/nginx/conf.d/* /etc/nginx/nginx.conf /var/www/html /usr/share/nginx/html /data
 COPY etc/nginx/ /etc/nginx/
@@ -20,9 +20,9 @@ ARG BUILD_REV
 ARG BUILD_DATE
 LABEL org.opencontainers.image.title="alwatr/nginx" \
       org.opencontainers.image.description="The slim (lightweight) version of the NGINX web server, packaged by Alwatr." \
-      org.opencontainers.image.base.name="docker.io/library/nginx:1.29.0-alpine-slim" \
-      org.opencontainers.image.version="1.29.0" \
-      org.opencontainers.image.ref.name="1.29.0-alpine-slim" \
+      org.opencontainers.image.base.name="docker.io/library/nginx:1.29.1-alpine-slim" \
+      org.opencontainers.image.version="1.29.1" \
+      org.opencontainers.image.ref.name="1.29.1-alpine-slim" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.created=${BUILD_DATE} \
       org.opencontainers.image.revision=${BUILD_REV} \
