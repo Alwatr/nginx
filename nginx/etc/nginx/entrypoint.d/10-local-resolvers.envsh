@@ -1,12 +1,7 @@
-#!/bin/sh
-
 # if $NGINX_RESOLVERS set to local, set it to the local resolvers from /etc/resolv.conf and export it
-
-set -eu
 
 LC_ALL=C
 ME='10-local-resolvers.envsh'
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # if $NGINX_RESOLVERS is not set to local, do nothing
 [ "${NGINX_RESOLVERS:-}" == local ] || return 0
