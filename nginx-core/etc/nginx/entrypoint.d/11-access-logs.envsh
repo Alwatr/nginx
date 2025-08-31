@@ -2,7 +2,7 @@
 
 set -eu
 
-ME=$(basename "$0")
+ME='11-access-logs.envsh'
 
 test -n "${NGINX_ACCESS_LOG:-}" && exit 0
 
