@@ -1,7 +1,7 @@
 # Remember: change logs generated from pull requests, do not push hotfix directly to default branch.
 
-current_version=3.6.1
-new_version=3.7.0
+current_version=3.7.0
+new_version=3.7.1
 find . -name 'Dockerfile' -exec sed -i '' "s/$current_version/$new_version/g" {} +
 
 git commit -am "release: v$new_version"
