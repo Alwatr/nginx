@@ -15,7 +15,6 @@ log_format json escape=json '{'
   '"request_method": "$request_method", '
   '"request_time": "$request_time", '
   '"host": "$host", '
-  '"server_name": "$server_name", '
   '"limit_req_status": "$limit_req_status"'
 '}';
 
