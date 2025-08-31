@@ -15,7 +15,6 @@ log_format json escape=json '{'
   '"request_method": "$request_method", '
   '"request_time": "$request_time", '
   '"host": "$host", '
-  '"server_name": "$server_name", '
   '"limit_req_status": "$limit_req_status"'
 '}';
 
@@ -27,4 +26,4 @@ log_format json escape=json '{'
 
 error_log  /var/log/nginx/error.log $NGINX_ERROR_LOG_LEVEL;
 
-access_log $NGINX_ACCESS_LOG;
+access_log /var/log/nginx/access.log json if=$NGINX_ENABLE_ACCESS_LOG;
