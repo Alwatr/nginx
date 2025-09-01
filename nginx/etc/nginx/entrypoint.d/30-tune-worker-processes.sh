@@ -6,9 +6,17 @@ LC_ALL=C
 ME=$(basename "$0")
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-[ "${NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE:-}" ] || exit 0
+case "${NGINX_PROCESSES_AUTOTUNE:-}" in
+  1|true|yes|Yes|on|ON|True|TRUE)
+    echo "$ME: Auto-tuning NGINX worker processes based on system resources";
+    ;;
+  *)
+    echo "$ME: NGINX_PROCESSES_AUTOTUNE is not set, skipping";
+    exit 0;
+    ;;
+esac
 
-touch /etc/nginx/nginx.conf 2>/dev/null || { echo >&2 "$ME: error: can not modify /etc/nginx/nginx.conf (read-only file system?)"; exit 0; }
+touch /etc/nginx/nginx.conf 2>/dev/null || { echo >&2 "$ME: error: can not modify /etc/nginx/nginx.conf (read-only file system?)"; exit 1; }
 
 ceildiv() {
   num=$1
