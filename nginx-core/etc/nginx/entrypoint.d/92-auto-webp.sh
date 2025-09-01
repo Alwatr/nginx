@@ -7,11 +7,11 @@ ME=$(basename "$0");
 
 case "${NGINX_AUTO_WEBP:-}" in
   1|true|yes|Yes|on|ON|True|TRUE)
-    echo "$ME: Enable auto webp config";
+    echo "$ME: Enable auto WebP config";
     # keep the file
     ;;
   *)
-    echo "$ME: Remove auto webp config";
+    echo "$ME: Remove auto WebP config";
     rm -fv /etc/nginx/conf.d/http.d/42-map-webp.conf;
     rm -fv /etc/nginx/conf.d/location.d/50-webp.conf;
     ;;
