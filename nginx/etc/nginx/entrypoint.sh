@@ -2,45 +2,38 @@
 
 set -eu
 
-entrypoint_log() {
-  if [ -z "${NGINX_ENTRYPOINT_QUIET_LOGS:-}" ];
-  then
-    echo "$@"
-  fi
-}
-
 entrypointDir=/etc/nginx/entrypoint.d/
 
 if [ "$1" = "nginx" ] || [ "$1" = "nginx-debug" ]; then
   if /usr/bin/find "$entrypointDir" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read v;
   then
-    entrypoint_log "$0: $entrypointDir is not empty, will attempt to perform configuration"
+    echo "$0: $entrypointDir is not empty, will attempt to perform configuration"
 
-    entrypoint_log "$0: Looking for shell scripts in $entrypointDir"
+    echo "$0: Looking for shell scripts in $entrypointDir"
     find "$entrypointDir" -follow -type f -print | sort -V | while read -r f;
     do
       case "$f" in
         *.envsh)
-          entrypoint_log "$0: Sourcing $f";
+          echo "$0: Sourcing $f";
           . "$f"
           ;;
         *.sh)
           if [ -x "$f" ];
           then
-            entrypoint_log "$0: Launching $f";
+            echo "$0: Launching $f";
             "$f"
           else
             # warn on shell scripts without exec bit
-            entrypoint_log "$0: Ignoring $f, not executable!";
+            echo "$0: Ignoring $f, not executable!";
           fi
           ;;
-        *) entrypoint_log "$0: Ignoring $f";;
+        *) echo "$0: Ignoring $f";;
       esac
     done
 
-    entrypoint_log "$0: Configuration complete; ready for start up"
+    echo "$0: Configuration complete; ready for start up"
   else
-    entrypoint_log "$0: No files found in $entrypointDir, skipping configuration"
+    echo "$0: No files found in $entrypointDir, skipping configuration"
   fi
 fi
 
