@@ -11,7 +11,7 @@ COPY default-data/ /default-data/
 
 # Default environment for nginx template
 ENV NGINX_ACCESS_LOG="/var/log/nginx/access.log json" \
-    NGINX_ENABLE_ACCESS_LOG="1" \
+    NGINX_ENABLE_ACCESS_LOG="on" \
     NGINX_ERROR_LOG_LEVEL=notice \
     NGINX_WORKER_CONNECTIONS=2048 \
     NGINX_LIMIT_REQ_ERROR=503 \
@@ -21,10 +21,10 @@ ENV NGINX_ACCESS_LOG="/var/log/nginx/access.log json" \
     NGINX_FORCE_DOMAIN="" \
     NGINX_FORCE_DOMAIN_STATUS=302 \
     NGINX_FORCE_REDIRECT_STATUS=307 \
-    NGINX_AUTO_WEBP="" \
-    NGINX_ENTRYPOINT_WORKER_PROCESSES_AUTOTUNE=1 \
+    NGINX_AUTO_WEBP="off" \
+    NGINX_PROCESSES_AUTOTUNE="on" \
     NGINX_ENTRYPOINT_QUIET_LOGS="" \
-    NGINX_CORS_ENABLE="" \
+    NGINX_CORS_ENABLE="off" \
     NGINX_CORS_ORIGIN="*" \
     NGINX_CORS_METHODS="GET, OPTIONS" \
     NGINX_CORS_HEADERS="*" \
