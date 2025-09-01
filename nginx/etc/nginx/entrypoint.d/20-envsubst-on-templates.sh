@@ -13,7 +13,7 @@ auto_envsubst() {
   local template defined_envs relative_path output_path subdir;
   defined_envs=$(printf '${%s} ' $(awk "END { for (name in ENVIRON) { print ( name ~ /${filter}/ ) ? name : \"\" } }" < /dev/null ));
 
-  echo "$ME: Defined environments: $defined_envs";
+  echo "$ME: Defined environments: ${defined_envs}";
 
   [ -d "$template_dir" ] || return 0;
 
