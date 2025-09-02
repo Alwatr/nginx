@@ -193,3 +193,5 @@ ncpu=$( printf "%s\n%s\n%s\n%s\n%s\n" \
                | head -n 1 )
 
 sed -i.bak -r 's/^(worker_processes)(.*)$/# Commented out by '"$ME"' on '"$(date)"'\n#\1\2\n\1 '"$ncpu"';/' /etc/nginx/nginx.conf
+
+echo "$ME: Set NGINX worker_processes to $ncpu";
