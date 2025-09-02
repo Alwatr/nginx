@@ -2,38 +2,40 @@
 
 set -eu
 
+ME=$(basename "$0");
+
 entrypointDir=/etc/nginx/entrypoint.d/
 
 if [ "$1" = "nginx" ] || [ "$1" = "nginx-debug" ]; then
   if /usr/bin/find "$entrypointDir" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read v;
   then
-    echo "$0: $entrypointDir is not empty, will attempt to perform configuration"
+    echo "$ME: $entrypointDir is not empty, will attempt to perform configuration"
 
-    echo "$0: Looking for shell scripts in $entrypointDir"
+    echo "$ME: Looking for shell scripts in $entrypointDir"
     find "$entrypointDir" -follow -type f -print | sort -V | while read -r f;
     do
       case "$f" in
         *.envsh)
-          echo "$0: Sourcing $f";
+          echo "$ME: Sourcing $f";
           . "$f"
           ;;
         *.sh)
           if [ -x "$f" ];
           then
-            echo "$0: Launching $f";
+            echo "$ME: Launching $f";
             "$f"
           else
             # warn on shell scripts without exec bit
-            echo "$0: Ignoring $f, not executable!";
+            echo "$ME: Ignoring $f, not executable!";
           fi
           ;;
-        *) echo "$0: Ignoring $f";;
+        *) echo "$ME: Ignoring $f";;
       esac
     done
 
-    echo "$0: Configuration complete; ready for start up"
+    echo "$ME: Configuration complete; ready for start up"
   else
-    echo "$0: No files found in $entrypointDir, skipping configuration"
+    echo "$ME: No files found in $entrypointDir, skipping configuration"
   fi
 fi
 
