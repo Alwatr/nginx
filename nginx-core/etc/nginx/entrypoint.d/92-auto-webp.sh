@@ -5,7 +5,7 @@ test -n "${TEST_MODE:-}" && exit 0;
 
 ME=$(basename "$0");
 
-case "${NGINX_AUTO_WEBP:-}" in
+case "${NHERIT_AUTO_WEBP:-}" in
   1|true|yes|Yes|on|ON|True|TRUE)
     echo "$ME: Enable auto WebP config";
     # keep the file

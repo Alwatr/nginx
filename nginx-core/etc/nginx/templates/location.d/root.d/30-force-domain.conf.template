@@ -1,4 +1,4 @@
-if ($host != $NGINX_FORCE_DOMAIN) {
-  return $NGINX_FORCE_DOMAIN_STATUS $http_x_forwarded_proto://$NGINX_FORCE_DOMAIN$request_uri;
+if ($host != $NHERIT_FORCE_DOMAIN) {
+  return $NHERIT_FORCE_DOMAIN_STATUS $http_x_forwarded_proto://$NHERIT_FORCE_DOMAIN$request_uri;
   break;
 }

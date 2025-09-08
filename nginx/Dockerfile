@@ -12,8 +12,8 @@ ENTRYPOINT ["/etc/nginx/entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
 
 # Default environment for nginx template
-ENV NGINX_WORKER_CONNECTIONS=2048 \
-    NGINX_PROCESSES_AUTOTUNE="on"
+ENV NHERIT_WORKER_CONNECTIONS=2048 \
+    NHERIT_PROCESSES_AUTOTUNE="on"
 
 ARG BUILD_REV
 ARG BUILD_DATE

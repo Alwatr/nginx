@@ -15,7 +15,7 @@ FROM ghcr.io/alwatr/nginx:2
 
 ```Dockerfile
 ARG NODE_VERSION=lts
-ARG ALWATR_NGINX_VERSION=2
+ARG ALWATR_NHERIT_VERSION=2
 FROM docker.io/library/node:${NODE_VERSION} as builder
 WORKDIR /app
 COPY package.json *.lock ./
@@ -29,9 +29,9 @@ RUN yarn build
 
 # ---
 
-FROM ghcr.io/alwatr/nginx-pwa:${ALWATR_NGINX_VERSION} as nginx
+FROM ghcr.io/alwatr/nginx-pwa:${ALWATR_NHERIT_VERSION} as nginx
 # Config nginx
-ENV NGINX_ACCESS_LOG="/var/log/nginx/access.log json"
+ENV NHERIT_ACCESS_LOG="/var/log/nginx/access.log json"
 # Copy builded files from last stage
 COPY --from=builder /app/dist/ ./
 RUN pwd; ls -lAhF;

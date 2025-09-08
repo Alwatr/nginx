@@ -1,22 +1,22 @@
 ME='11-access-logs.envsh';
 
-if test -n "${NGINX_ACCESS_LOG:-}"
+if test -n "${NHERIT_ACCESS_LOG:-}"
 then
-  echo "$ME: NGINX_ACCESS_LOG already set to '$NGINX_ACCESS_LOG'";
+  echo "$ME: NHERIT_ACCESS_LOG already set to '$NHERIT_ACCESS_LOG'";
   return 0;
 fi
 
-echo "$ME: Generate access log configuration from NGINX_ENABLE_ACCESS_LOG";
+echo "$ME: Generate access log configuration from NHERIT_ENABLE_ACCESS_LOG";
 
-case "${NGINX_ENABLE_ACCESS_LOG:-}" in
+case "${NHERIT_ENABLE_ACCESS_LOG:-}" in
   1|true|yes|Yes|on|ON|True|TRUE)
-    NGINX_ACCESS_LOG="/var/log/nginx/access.log json";
+    NHERIT_ACCESS_LOG="/var/log/nginx/access.log json";
     ;;
   *)
-    NGINX_ACCESS_LOG="off";
+    NHERIT_ACCESS_LOG="off";
     ;;
 esac
 
-echo "$ME: Access log configuration is set to '$NGINX_ACCESS_LOG'";
+echo "$ME: Access log configuration is set to '$NHERIT_ACCESS_LOG'";
 
-export NGINX_ACCESS_LOG;
+export NHERIT_ACCESS_LOG;

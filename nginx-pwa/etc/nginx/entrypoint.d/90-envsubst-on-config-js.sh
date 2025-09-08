@@ -5,9 +5,9 @@ set -eu
 
 ME=$(basename "$0")
 
-test -z "${NGINX_CONFIG_JS_URI:-}" && exit 0;
+test -z "${NHERIT_CONFIG_JS_URI:-}" && exit 0;
 
-configJsPath="$NGINX_DOCUMENT_ROOT/${NGINX_CONFIG_JS_URI:-}";
+configJsPath="$NHERIT_DOCUMENT_ROOT/${NHERIT_CONFIG_JS_URI:-}";
 if test ! -f "$configJsPath";
 then
   echo "$ME: ERROR: $configJsPath does not exist";

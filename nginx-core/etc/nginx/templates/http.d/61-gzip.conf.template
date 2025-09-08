@@ -1,7 +1,7 @@
-gzip            $NGINX_GZIP;
-gzip_comp_level $NGINX_GZIP_COMP_LEVEL;
-gzip_vary       $NGINX_GZIP_VARY;
-gzip_min_length $NGINX_GZIP_MIN_LENGTH;
+gzip            $NHERIT_GZIP;
+gzip_comp_level $NHERIT_GZIP_COMP_LEVEL;
+gzip_vary       $NHERIT_GZIP_VARY;
+gzip_min_length $NHERIT_GZIP_MIN_LENGTH;
 gzip_disable    "MSIE [1-6].(?!.*SV1)";
 gzip_buffers    32 4k;
 gzip_proxied    any;

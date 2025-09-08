@@ -1,20 +1,20 @@
-# if $NGINX_RESOLVERS set to local, set it to the local resolvers from /etc/resolv.conf and export it
+# if $NHERIT_RESOLVERS set to local, set it to the local resolvers from /etc/resolv.conf and export it
 
 LC_ALL=C
 ME='10-local-resolvers.envsh';
 
-# if $NGINX_RESOLVERS is not set to local, do nothing
-if [ "${NGINX_RESOLVERS:-}" != local ];
+# if $NHERIT_RESOLVERS is not set to local, do nothing
+if [ "${NHERIT_RESOLVERS:-}" != local ];
 then
-  echo "$ME: NGINX_RESOLVERS is not set to local, skipping";
+  echo "$ME: NHERIT_RESOLVERS is not set to local, skipping";
   return 0;
 fi
 
-NGINX_RESOLVERS=$(awk 'BEGIN{ORS=" "} $1=="nameserver" {if ($2 ~ ":") {print "["$2"]"} else {print $2}}' /etc/resolv.conf);
+NHERIT_RESOLVERS=$(awk 'BEGIN{ORS=" "} $1=="nameserver" {if ($2 ~ ":") {print "["$2"]"} else {print $2}}' /etc/resolv.conf);
 
 # remove trailing space
-NGINX_RESOLVERS="${NGINX_RESOLVERS% }";
+NHERIT_RESOLVERS="${NHERIT_RESOLVERS% }";
 
-echo "$ME: Local resolvers are set to '$NGINX_RESOLVERS'";
+echo "$ME: Local resolvers are set to '$NHERIT_RESOLVERS'";
 
-export NGINX_RESOLVERS;
+export NHERIT_RESOLVERS;

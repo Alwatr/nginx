@@ -5,7 +5,7 @@ test -n "${TEST_MODE:-}" && exit 0;
 
 ME=$(basename "$0");
 
-case "${NGINX_CORS_ENABLE:-}" in
+case "${NHERIT_CORS_ENABLE:-}" in
   1|true|yes|Yes|on|ON|True|TRUE)
     echo "$ME: Enable CORS config";
     # keep the file

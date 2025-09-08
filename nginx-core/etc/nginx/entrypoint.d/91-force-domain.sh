@@ -4,8 +4,8 @@ set -eu
 ME=$(basename "$0");
 
 
-if [ -n "${NGINX_FORCE_DOMAIN:-}" ]; then
-  echo "$ME: Enable force domain config to '$NGINX_FORCE_DOMAIN'";
+if [ -n "${NHERIT_FORCE_DOMAIN:-}" ]; then
+  echo "$ME: Enable force domain config to '$NHERIT_FORCE_DOMAIN'";
   # keep the file
 else
   echo "$ME: Remove force domain location config";

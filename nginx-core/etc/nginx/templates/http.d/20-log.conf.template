@@ -24,6 +24,6 @@ log_format json escape=json '{'
 # '"upstream_response_length": "$upstream_response_length", '
 # '"upstream_cache_status": "$upstream_cache_status"'
 
-error_log  /var/log/nginx/error.log $NGINX_ERROR_LOG_LEVEL;
+error_log  /var/log/nginx/error.log $NHERIT_ERROR_LOG_LEVEL;
 
-access_log $NGINX_ACCESS_LOG;
+access_log $NHERIT_ACCESS_LOG;
