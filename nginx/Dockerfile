@@ -17,6 +17,9 @@ RUN --mount=type=cache,target=/var/cache/apk \
   printf "\n\x1b[0;36m🔸 Download NGINX source code\x1b[0m\n\n"; \
   curl -sSL "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar -xzC /tmp; \
   \
+  printf "\n\x1b[0;36m🔸 Cloning headers-more-nginx-module repository\x1b[0m\n\n"; \
+  git clone --depth=1 https://github.com/openresty/headers-more-nginx-module.git /tmp/headers-more-nginx-module; \
+  \
   printf "\n\x1b[0;36m🔸 Cloning ngx_brotli repository\x1b[0m\n\n"; \
   git clone --depth=1 --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli; \
   \
@@ -39,15 +42,15 @@ RUN --mount=type=cache,target=/var/cache/apk \
   cd "/tmp/nginx-${NGINX_VERSION}"; \
   ./configure \
     --with-compat \
-    --add-dynamic-module=/tmp/ngx_brotli; \
+    --add-dynamic-module=/tmp/ngx_brotli \
+    --add-dynamic-module=/tmp/headers-more-nginx-module; \
   \
   printf "\n\x1b[0;36m🔸 Building the dynamic modules\x1b[0m\n\n"; \
   make modules; \
   \
   printf "\n\x1b[0;36m🔸 Copying the dynamic modules to /tmp/modules\x1b[0m\n\n"; \
   mkdir -p /tmp/modules; \
-  cp -v "objs/ngx_http_brotli_filter_module.so" /tmp/modules/; \
-  cp -v "objs/ngx_http_brotli_static_module.so" /tmp/modules/;
+  mv -v "objs/*.so" /tmp/modules/;
 
 
 # Final stage
