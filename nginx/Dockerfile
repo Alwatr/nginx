@@ -50,6 +50,8 @@ RUN --mount=type=cache,target=/var/cache/apk \
     cp -v "objs/ngx_http_brotli_filter_module.so" /tmp/modules/; \
     cp -v "objs/ngx_http_brotli_static_module.so" /tmp/modules/
 
+
+
 # Final stage
 FROM docker.io/library/nginx:1.29.1-alpine-otel
 
