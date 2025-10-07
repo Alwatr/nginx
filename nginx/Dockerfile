@@ -12,18 +12,18 @@ RUN --mount=type=cache,target=/var/cache/apk \
     linux-headers \
     openssl-dev \
     pcre-dev \
-    zlib-dev; \
-  \
-  printf "\n\x1b[0;36m🔸 Download NGINX source code\x1b[0m\n\n"; \
+    zlib-dev;
+
+RUN printf "\n\x1b[0;36m🔸 Download NGINX source code\x1b[0m\n\n"; \
   curl -sSL "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar -xzC /tmp; \
   \
   printf "\n\x1b[0;36m🔸 Cloning headers-more-nginx-module repository\x1b[0m\n\n"; \
   git clone --depth=1 https://github.com/openresty/headers-more-nginx-module.git /tmp/headers-more-nginx-module; \
   \
   printf "\n\x1b[0;36m🔸 Cloning ngx_brotli repository\x1b[0m\n\n"; \
-  git clone --depth=1 --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli; \
-  \
-  printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
+  git clone --depth=1 --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli;
+
+RUN printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
   cd /tmp/ngx_brotli/deps/brotli; \
   mkdir out; \
   cd out; \
@@ -50,8 +50,11 @@ RUN --mount=type=cache,target=/var/cache/apk \
   \
   printf "\n\x1b[0;36m🔸 Copying the dynamic modules to /tmp/modules\x1b[0m\n\n"; \
   mkdir -p /tmp/modules; \
-  mv -v "objs/*.so" /tmp/modules/;
-
+  cp -av \
+    objs/ngx_http_brotli_filter_module.so \
+    objs/ngx_http_brotli_static_module.so \
+    objs/ngx_http_headers_more_filter_module.so \
+    /tmp/modules/;
 
 # Final stage
 FROM docker.io/library/nginx:1.29.1-alpine-otel
