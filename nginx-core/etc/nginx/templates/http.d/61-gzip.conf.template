@@ -1,4 +1,5 @@
 gzip            $NGINX_GZIP;
+gzip_static     $NGINX_GZIP_STATIC;
 gzip_comp_level $NGINX_GZIP_COMP_LEVEL;
 gzip_vary       $NGINX_GZIP_VARY;
 gzip_min_length $NGINX_GZIP_MIN_LENGTH;
