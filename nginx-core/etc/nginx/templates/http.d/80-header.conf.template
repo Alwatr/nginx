@@ -1,6 +1,11 @@
-add_header  Server AlwatrWebServer always;
-add_header  X-Frame-Options SAMEORIGIN;
-add_header  X-Content-Type-Options nosniff;
-add_header  X-XSS-Protection "1; mode=block";
-add_header  X-UA-Compatible "IE=Edge,chrome=1";
-# add_header  X-Cache $upstream_cache_status always;
+more_set_headers
+  'Server: AlwatrWebServer'
+  'X-Frame-Options: SAMEORIGIN'
+  'X-Content-Type-Options: nosniff'
+  'X-XSS-Protection: 1; mode=block'
+  'X-UA-Compatible: IE=Edge'
+  'Referrer-Policy: strict-origin-when-cross-origin'
+  'Permissions-Policy: $NGINX_PERMISSIONS_POLICY'
+  'X-DNS-Prefetch-Control: on'
+  'X-UA-Compatible: IE=Edge'
+;
