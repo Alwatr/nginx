@@ -1,10 +1,8 @@
-gzip            $NGINX_GZIP;
-gzip_static     $NGINX_GZIP_STATIC;
-gzip_comp_level $NGINX_GZIP_COMP_LEVEL;
-gzip_vary       $NGINX_GZIP_VARY;
-gzip_min_length $NGINX_GZIP_MIN_LENGTH;
-gzip_disable    "msie6";
-gzip_types
+brotli               $NGINX_BROTLI;
+brotli_static        $NGINX_BROTLI_STATIC;
+brotli_comp_level    $NGINX_BROTLI_COMP_LEVEL;
+brotli_min_length    $NGINX_BROTLI_MIN_LENGTH;
+brotli_types
     text/html
     text/plain
     text/css

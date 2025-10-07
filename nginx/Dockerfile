@@ -1,7 +1,68 @@
+FROM docker.io/library/nginx:1.29.1-alpine-otel AS build
+
+# NGINX_VERSION is available from the base image
+RUN --mount=type=cache,target=/var/cache/apk \
+    set -eux; \
+    printf "\n\x1b[0;36m🔸 Install dependencies\x1b[0m\n\n"; \
+    apk add --no-cache \
+        build-base \
+        cmake \
+        curl \
+        git \
+        linux-headers \
+        openssl-dev \
+        pcre-dev \
+        zlib-dev; \
+    \
+    printf "\n\x1b[0;36m🔸 Download NGINX source code\x1b[0m\n\n"; \
+    curl -sSL "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar -xzC /tmp; \
+    \
+    printf "\n\x1b[0;36m🔸 Cloning ngx_brotli repository\x1b[0m\n\n"; \
+    git clone --depth=1 --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli; \
+    \
+    printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
+    cd /tmp/ngx_brotli/deps/brotli; \
+    mkdir out; \
+    cd out; \
+    cmake \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DCMAKE_C_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" \
+        -DCMAKE_CXX_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" \
+        -DCMAKE_INSTALL_PREFIX=./installed ..; \
+    cmake \
+        --build . \
+        --config Release \
+        --target brotlienc; \
+    \
+    printf "\n\x1b[0;36m🔸 Configure NGINX with the brotli dynamic module\x1b[0m\n\n"; \
+    cd "/tmp/nginx-${NGINX_VERSION}"; \
+    ./configure \
+        --with-compat \
+        --add-dynamic-module=/tmp/ngx_brotli; \
+    \
+    printf "\n\x1b[0;36m🔸 Building the dynamic modules\x1b[0m\n\n"; \
+    make modules; \
+    \
+    printf "\n\x1b[0;36m🔸 Copying the dynamic modules to /tmp/modules\x1b[0m\n\n"; \
+    mkdir -p /tmp/modules; \
+    cp -v "objs/ngx_http_brotli_filter_module.so" /tmp/modules/; \
+    cp -v "objs/ngx_http_brotli_static_module.so" /tmp/modules/
+
+
+
+# Final stage
 FROM docker.io/library/nginx:1.29.1-alpine-otel
 
+# Clean default configurations and files
 RUN rm -rfv /docker-entrypoint* /etc/nginx/conf.d/* /etc/nginx/nginx.conf /var/www/html /usr/share/nginx/html /data
+
+# Copy custom configuration files
 COPY etc/nginx/ /etc/nginx/
+
+# Copy the dynamic module from the build stage
+COPY --from=build /tmp/modules/*.so /etc/nginx/modules/
+
 RUN chmod a+rx /etc/nginx/entrypoint.sh /etc/nginx/entrypoint.d/*.sh
 # RUN ls -RlAhF /etc/nginx
 
