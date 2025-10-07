@@ -1,0 +1,36 @@
+brotli               $NGINX_BROTLI;
+brotli_static        $NGINX_BROTLI_STATIC;
+brotli_comp_level    $NGINX_BROTLI_COMP_LEVEL;
+brotli_min_length    $NGINX_BROTLI_MIN_LENGTH;
+brotli_types
+    text/html
+    text/plain
+    text/css
+    text/javascript
+    text/xml
+    text/csv
+    text/x-component
+    text/x-js
+    text/xsd
+    text/xsl
+    application/json
+    application/javascript
+    application/ecmascript
+    application/postscript
+    application/xml
+    application/x-javascript
+    application/xhtml+xml
+    application/rss+xml
+    application/atom+xml
+    application/ld+json
+    application/vnd.ms-fontobject
+    font/eot
+    font/otf
+    font/ttf
+    application/x-font-opentype
+    application/x-font-truetype
+    application/x-font-ttf
+    image/svg+xml
+    image/gif
+    image/x-icon
+;
