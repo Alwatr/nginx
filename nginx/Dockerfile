@@ -3,8 +3,7 @@ FROM docker.io/library/nginx:1.29.1-alpine-otel AS build
 # NGINX_VERSION is available from the base image
 RUN --mount=type=cache,target=/var/cache/apk \
     set -eux; \
-    function echoStep() { printf "\n\x1b[0;36m🔸 $1\x1b[0m\n\n"; } \
-    echoStep "Install dependencies"; \
+    printf "\n\x1b[0;36m🔸 Install dependencies\x1b[0m\n\n"; \
     apk add --no-cache \
         build-base \
         cmake \
@@ -15,13 +14,13 @@ RUN --mount=type=cache,target=/var/cache/apk \
         pcre-dev \
         zlib-dev; \
     \
-    echoStep "Download NGINX source code"; \
+    printf "\n\x1b[0;36m🔸 Download NGINX source code\x1b[0m\n\n"; \
     curl -sSL "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar -xzC /tmp; \
     \
-    echoStep "Cloning ngx_brotli repository"; \
+    printf "\n\x1b[0;36m🔸 Cloning ngx_brotli repository\x1b[0m\n\n"; \
     git clone --depth=1 --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli; \
     \
-    echoStep "Build brotli"; \
+    printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
     cd /tmp/ngx_brotli/deps/brotli; \
     mkdir out; \
     cd out; \
@@ -36,16 +35,16 @@ RUN --mount=type=cache,target=/var/cache/apk \
         --config Release \
         --target brotlienc; \
     \
-    echoStep "Configure NGINX with the brotli dynamic module"; \
+    printf "\n\x1b[0;36m🔸 Configure NGINX with the brotli dynamic module\x1b[0m\n\n"; \
     cd "/tmp/nginx-${NGINX_VERSION}"; \
     ./configure \
         --with-compat \
         --add-dynamic-module=/tmp/ngx_brotli; \
     \
-    echoStep "Building the dynamic modules"; \
+    printf "\n\x1b[0;36m🔸 Building the dynamic modules\x1b[0m\n\n"; \
     make modules; \
     \
-    echoStep "Copying the dynamic modules to /tmp/modules"; \
+    printf "\n\x1b[0;36m🔸 Copying the dynamic modules to /tmp/modules\x1b[0m\n\n"; \
     mkdir -p /tmp/modules; \
     cp -v "objs/ngx_http_brotli_filter_module.so" /tmp/modules/; \
     cp -v "objs/ngx_http_brotli_static_module.so" /tmp/modules/
