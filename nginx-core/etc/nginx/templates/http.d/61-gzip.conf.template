@@ -6,31 +6,34 @@ gzip_disable    "MSIE [1-6].(?!.*SV1)";
 gzip_buffers    32 4k;
 gzip_proxied    any;
 gzip_types
-    application/ecmascript
-    application/javascript
+    text/html
+    text/plain
+    text/css
+    text/javascript
+    text/xml
+    text/csv
+    text/x-component
+    text/x-js
+    text/xsd
+    text/xsl
     application/json
+    application/javascript
+    application/ecmascript
     application/postscript
-    application/font-woff
+    application/xml
     application/x-javascript
+    application/xhtml+xml
+    application/rss+xml
+    application/atom+xml
+    application/ld+json
     application/vnd.ms-fontobject
+    font/eot
+    font/otf
+    font/ttf
     application/x-font-opentype
     application/x-font-truetype
     application/x-font-ttf
-    application/xml
-    image/gif
     image/svg+xml
+    image/gif
     image/x-icon
-    text/x-component
-    text/x-js
-    text/css
-    text/csv
-    text/javascript
-    text/plain
-    text/xml
-    text/xsd
-    text/xsl
-    font/eot
-    font/opentype
-    font/otf
-    font/woff
 ;
