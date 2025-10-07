@@ -36,9 +36,9 @@ RUN printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
   cmake \
     --build . \
     --config Release \
-    --target brotlienc; \
-  \
-  printf "\n\x1b[0;36m🔸 Configure NGINX with the brotli dynamic module\x1b[0m\n\n"; \
+    --target brotlienc;
+
+RUN printf "\n\x1b[0;36m🔸 Configure NGINX with the brotli dynamic module\x1b[0m\n\n"; \
   cd "/tmp/nginx-${NGINX_VERSION}"; \
   ./configure \
     --with-compat \
