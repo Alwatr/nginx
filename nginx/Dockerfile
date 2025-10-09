@@ -68,7 +68,6 @@ COPY etc/nginx/ /etc/nginx/
 # Copy the dynamic module from the build stage
 COPY --from=build /tmp/modules/*.so /etc/nginx/modules/
 
-RUN chmod a+rx /etc/nginx/entrypoint.sh /etc/nginx/entrypoint.d/*.sh
 # RUN ls -RlAhF /etc/nginx
 
 EXPOSE 80
@@ -76,9 +75,6 @@ STOPSIGNAL SIGQUIT
 WORKDIR /data
 ENTRYPOINT ["/etc/nginx/entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
-
-# Default environment for nginx template
-ENV NGINX_PROCESSES_AUTOTUNE="off"
 
 ARG BUILD_REV
 ARG BUILD_DATE
