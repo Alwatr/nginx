@@ -10,7 +10,8 @@ COPY default-data/ /default-data/
 # RUN ls -RlahF /etc/nginx /default-data /data
 
 # Default environment for nginx template
-ENV NGINX_ACCESS_LOG="" \
+ENV NGINX_WORKER_CONNECTIONS=2048 \
+    NGINX_ACCESS_LOG="" \
     NGINX_ENABLE_ACCESS_LOG="on" \
     NGINX_ERROR_LOG_LEVEL=notice \
     NGINX_WORKER_CONNECTIONS=2048 \
