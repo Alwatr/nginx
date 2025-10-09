@@ -13,5 +13,11 @@
   "cSpell.language": "en,fa,fa-IR",
   "cSpell.words": ["alwatr"],
   "git.autoStash": true,
-  "githubPullRequests.ignoredPullRequestBranches": ["main", "next"]
+  "githubPullRequests.ignoredPullRequestBranches": [
+    "main",
+    "next"
+  ],
+  "github-actions.workflows.pinned.workflows": [
+    ".github/workflows/publish-container.yml"
+  ]
 }
