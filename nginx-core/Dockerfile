@@ -7,7 +7,8 @@ WORKDIR /data
 
 COPY etc/nginx/ /etc/nginx/
 COPY default-data/ /default-data/
-# RUN ls -RlahF /etc/nginx /default-data /data
+COPY tools/ /usr/local/bin/
+# RUN ls -RlahF /etc/nginx /default-data /data /usr/local/bin
 
 # Default environment for nginx template
 ENV NGINX_WORKER_CONNECTIONS=2048 \
