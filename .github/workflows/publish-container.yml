@@ -123,6 +123,8 @@ jobs:
       - name: 🚀 Build and publish container image
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
         uses: docker/build-push-action@v6.18.0
+        env:
+          NGINX_ERROR_LOG_LEVEL: debug
         with:
           context: ./${{matrix.path}}
           push: ${{ github.event_name != 'pull_request' }}
