@@ -6,7 +6,8 @@ ME=$(basename "$0");
 
 entrypointDir=/etc/nginx/entrypoint.d/
 
-if [ "$1" = "nginx" ] || [ "$1" = "nginx-debug" ]; then
+if [ "$1" = "nginx" ] || [ "$1" = "nginx-debug" ]
+then
   if /usr/bin/find "$entrypointDir" -mindepth 1 -maxdepth 1 -type f -print -quit 2>/dev/null | read v;
   then
     echo "$ME: $entrypointDir is not empty, will attempt to perform configuration"
