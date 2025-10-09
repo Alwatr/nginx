@@ -19,8 +19,8 @@ echoError() {
   echoColor 1 "❌ ${1:-'Error :('}\n\n"
 }
 
-# Compress all files in NGINX_DOCUMENT_ROOT recursively with Brotli
-# for use with nginx brotli_static module
+# Compress all images in NGINX_DOCUMENT_ROOT recursively to WebP
+# for use with nginx auto-webp feature
 
 if [ -z "${NGINX_DOCUMENT_ROOT:-}" ]; then
   echoError "Error: NGINX_DOCUMENT_ROOT environment variable is not set"
