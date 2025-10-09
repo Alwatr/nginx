@@ -58,4 +58,4 @@ find "$NGINX_DOCUMENT_ROOT" -type f \
 
 echoDone "Compression complete!"
 
-echo "To serve pre-compressed files, ensure \$NGINX_GZIP_STATIC is set to 'on' (currently set to '${NGINX_GZIP_STATIC:-off}')."
+echo "To serve pre-compressed files, ensure \$NGINX_BROTLI_STATIC is set to 'on' (currently set to '${NGINX_BROTLI_STATIC:-off}')."
