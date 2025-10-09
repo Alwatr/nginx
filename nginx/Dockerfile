@@ -78,7 +78,7 @@ ENTRYPOINT ["/etc/nginx/entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]
 
 # Default environment for nginx template
-ENV NGINX_PROCESSES_AUTOTUNE="on"
+ENV NGINX_PROCESSES_AUTOTUNE="off"
 
 ARG BUILD_REV
 ARG BUILD_DATE
