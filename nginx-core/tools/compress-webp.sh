@@ -1,0 +1,57 @@
+#!/bin/sh
+
+set -eu
+
+echoColor() {
+  # 1: red, 2: green, 3: yellow, 4: blue, 5: purple, 6: cyan, 7: light gray
+  printf "\x1b[0;3$1m$2\x1b[0m"
+}
+
+echoStep() {
+  echoColor 6 "\n🔸 $1\n\n"
+}
+
+echoDone() {
+  echoColor 2 "\n✅ ${1:-'Done ;)'}\n\n"
+}
+
+echoError() {
+  echoColor 1 "❌ ${1:-'Error :('}\n\n"
+}
+
+# Compress all files in NGINX_DOCUMENT_ROOT recursively with Brotli
+# for use with nginx brotli_static module
+
+if [ -z "${NGINX_DOCUMENT_ROOT:-}" ]; then
+  echoError "Error: NGINX_DOCUMENT_ROOT environment variable is not set"
+  exit 1
+fi
+
+if [ ! -d "$NGINX_DOCUMENT_ROOT" ]; then
+  echoError "Error: Directory $NGINX_DOCUMENT_ROOT does not exist"
+  exit 1
+fi
+
+if ! command -v cwebp >/dev/null 2>&1; then
+  echoStep "Installing libwebp..."
+  apk add --no-cache libwebp-tools
+fi
+
+echoStep "Compressing images in $NGINX_DOCUMENT_ROOT with WebP..."
+
+# Find and compress text-based files
+# Skip already compressed files (.br, .gz, etc.)
+find "$NGINX_DOCUMENT_ROOT" -type f \
+  \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" \
+	-o -name "*.gif" -o -name "*.tiff" -o -name "*.tif" \) \
+  ! -name "*.webp" |
+  while read -r file; do
+    if [ ! -f "${file}.webp" ] || [ "$file" -nt "${file}.webp" ]; then
+      echoStep "Compressing: $file"
+      cwebp -preset picture -mt -m 6 -af -q 82 -v "$file" -o "${file}.webp"
+    fi
+  done
+
+echoDone "Compression complete!"
+
+echo "To serve pre-compressed files, ensure \$NGINX_AUTO_WEBP is set to 'on' (currently set to '${NGINX_AUTO_WEBP:-off}')."
