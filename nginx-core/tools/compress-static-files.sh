@@ -47,19 +47,18 @@ find "$NGINX_DOCUMENT_ROOT" -type f \
   -o -name "*.csv" -o -name "*.yml" -o -name "*.yaml" \
   -o -name "*.txt" -o -name "*.md" -o -name "*.wasm" \
   -o -name "*.woff" -o -name "*.ttf" -o -name "*.otf" -o -name "*.eot" \
-	-o -name "*.jpeg" -o -name "*.jpg" -o -name "*.png" -o -name "*.gif" -o -name "*.webp" \
   -o -name "*.rss" -o -name "*.atom" \) \
-  ! -name "*.br" ! -name "*.gz" | while read -r file; do
-  if [ ! -f "${file}.br" ] || [ "$file" -nt "${file}.br" ]; then
-    echoStep "Compressing: $file"
-		if [ -f "${file}.br" ]
-		then
-			echoStep "Skipping (already compressed): $file"
-		else
-    	brotli --best --squash --verbose --lgwin=0 --keep --suffix=.br "$file"
-		fi
-  fi
-done
+  ! -name "*.br" ! -name "*.gz" |
+  while read -r file; do
+    if [ ! -f "${file}.br" ] || [ "$file" -nt "${file}.br" ]; then
+      echoStep "Compressing: $file"
+      if [ -f "${file}.br" ]; then
+        echoStep "Skipping (already compressed): $file"
+      else
+        brotli --best --squash --verbose --lgwin=0 --keep --suffix=.br "$file"
+      fi
+    fi
+  done
 
 echoDone "Compression complete!"
 
