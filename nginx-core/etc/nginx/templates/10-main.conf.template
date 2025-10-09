@@ -5,6 +5,11 @@ user nginx;
 # The file storing the process ID of the main process
 pid /var/run/nginx.pid;
 
+# Sets the worker threads to the number of CPU cores available in the system for best performance.
+# Set NGINX_PROCESSES_AUTOTUNE=on to enable auto-tuning.
+# Maximum number of connections = worker_processes * worker_connections
+worker_processes $NGINX_WORKER_PROCESSES;
+
 # Reduces timer resolution in worker processes, thus reducing the number of gettimeofday() system calls made. By default, gettimeofday() is called each time a kernel event is received. With reduced resolution, gettimeofday() is only called once per specified interval.
 timer_resolution 100ms;
 
