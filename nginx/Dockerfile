@@ -12,18 +12,18 @@ RUN --mount=type=cache,target=/var/cache/apk \
     linux-headers \
     openssl-dev \
     pcre-dev \
-    zlib-dev;
-
-RUN printf "\n\x1b[0;36m🔸 Download NGINX source code\x1b[0m\n\n"; \
+    zlib-dev; \
+  \
+  printf "\n\x1b[0;36m🔸 Download NGINX source code\x1b[0m\n\n"; \
   curl -sSL "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" | tar -xzC /tmp; \
   \
   printf "\n\x1b[0;36m🔸 Cloning headers-more-nginx-module repository\x1b[0m\n\n"; \
   git clone --depth=1 https://github.com/openresty/headers-more-nginx-module.git /tmp/headers-more-nginx-module; \
   \
   printf "\n\x1b[0;36m🔸 Cloning ngx_brotli repository\x1b[0m\n\n"; \
-  git clone --depth=1 --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli;
-
-RUN printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
+  git clone --depth=1 --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli; \
+  \
+  printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
   cd /tmp/ngx_brotli/deps/brotli; \
   mkdir out; \
   cd out; \
@@ -36,9 +36,9 @@ RUN printf "\n\x1b[0;36m🔸 Build brotli\x1b[0m\n\n"; \
   cmake \
     --build . \
     --config Release \
-    --target brotlienc;
-
-RUN printf "\n\x1b[0;36m🔸 Configure NGINX with the brotli dynamic module\x1b[0m\n\n"; \
+    --target brotlienc; \
+  \
+  printf "\n\x1b[0;36m🔸 Configure NGINX with the brotli dynamic module\x1b[0m\n\n"; \
   cd "/tmp/nginx-${NGINX_VERSION}"; \
   ./configure \
     --with-compat \
