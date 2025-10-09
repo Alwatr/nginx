@@ -43,7 +43,7 @@ echoStep "Compressing images in $NGINX_DOCUMENT_ROOT with WebP..."
 # Skip already compressed files (.br, .gz, etc.)
 find "$NGINX_DOCUMENT_ROOT" -type f \
   \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" \
-	-o -name "*.gif" -o -name "*.tiff" -o -name "*.tif" \) \
+  -o -name "*.gif" -o -name "*.tiff" -o -name "*.tif" \) \
   ! -name "*.webp" |
   while read -r file; do
     if [ ! -f "${file}.webp" ] || [ "$file" -nt "${file}.webp" ]; then
