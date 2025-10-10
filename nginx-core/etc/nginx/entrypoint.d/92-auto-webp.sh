@@ -1,20 +1,20 @@
 #!/bin/sh
 set -eu
 
-test -n "${TEST_MODE:-}" && exit 0;
+test -n "${TEST_MODE:-}" && exit 0
 
-ME=$(basename "$0");
+ME=$(basename "$0")
 
 case "${NGINX_AUTO_WEBP:-}" in
-  1|true|yes|Yes|on|ON|True|TRUE)
-    echo "$ME: Enable auto WebP config";
-    # keep the file
-    ;;
-  *)
-    echo "$ME: Remove auto WebP config";
-    rm -fv /etc/nginx/conf.d/http.d/42-map-webp.conf;
-    rm -fv /etc/nginx/conf.d/location.d/50-webp.conf;
-    ;;
+1 | true | yes | Yes | on | ON | True | TRUE)
+  echo "$ME: Enable auto WebP config"
+  # keep the file
+  ;;
+*)
+  echo "$ME: Remove auto WebP config"
+  rm -fv /etc/nginx/conf.d/http.d/42-map-webp.conf
+  rm -fv /etc/nginx/conf.d/location.d/50-webp.conf
+  ;;
 esac
 
-exit 0;
+exit 0
