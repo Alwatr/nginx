@@ -2,6 +2,9 @@
 
 set -eu
 
+# Set quality from the first argument, or default to 82
+WEBP_QUALITY=${1:-82};
+
 echoColor() {
   # 1: red, 2: green, 3: yellow, 4: blue, 5: purple, 6: cyan, 7: light gray
   printf "\x1b[0;3$1m$2\x1b[0m"
@@ -48,7 +51,7 @@ find "$NGINX_DOCUMENT_ROOT" -type f \
   while read -r file; do
     if [ ! -f "${file}.webp" ] || [ "$file" -nt "${file}.webp" ]; then
       echoStep "Compressing: $file"
-      cwebp -preset picture -mt -m 6 -af -q 82 -v "$file" -o "${file}.webp"
+      cwebp -mt -m 6 -af -q "$WEBP_QUALITY" -v "$file" -o "${file}.webp"
     fi
   done
 
