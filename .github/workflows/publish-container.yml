@@ -125,6 +125,11 @@ jobs:
         uses: docker/build-push-action@v6.18.0
         env:
           NGINX_ERROR_LOG_LEVEL: debug
+          NGINX_ENABLE_ACCESS_LOG: 'on'
+          NGINX_PROCESSES_AUTOTUNE: 'on'
+          NGINX_RESOLVERS: 'local'
+          NGINX_DISALLOW_ROBOTS: 'on'
+
         with:
           context: ./${{matrix.path}}
           push: ${{ github.event_name != 'pull_request' }}
