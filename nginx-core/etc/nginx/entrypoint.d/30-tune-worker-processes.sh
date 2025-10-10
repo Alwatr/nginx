@@ -16,7 +16,7 @@ case "${NGINX_PROCESSES_AUTOTUNE:-}" in
   ;;
 esac
 
-confPath="/etc/nginx/nginx.conf"
+confPath="/etc/nginx/conf.d/10-main.conf"
 if [ ! -f "$confPath" ]; then
   echo >&2 "$ME: error: $confPath does not exist"
   exit 1
