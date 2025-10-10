@@ -16,7 +16,17 @@ case "${NGINX_PROCESSES_AUTOTUNE:-}" in
     ;;
 esac
 
-touch /etc/nginx/nginx.conf 2>/dev/null || { echo >&2 "$ME: error: can not modify /etc/nginx/nginx.conf (read-only file system?)"; exit 1; }
+confPath="/etc/nginx/nginx.conf"
+if [ ! -f "$confPath" ]; then
+	echo >&2 "$ME: error: $confPath does not exist";
+	exit 1;
+fi
+
+if ! touch "$confPath" 2>/dev/null
+then
+	echo >&2 "$ME: error: can not modify $confPath (read-only file system?)";
+	exit 1;
+fi
 
 ceildiv() {
   num=$1
@@ -192,6 +202,6 @@ ncpu=$( printf "%s\n%s\n%s\n%s\n%s\n" \
                | sort -n \
                | head -n 1 )
 
-sed -i.bak -r 's/^(worker_processes)(.*)$/# Commented out by '"$ME"' on '"$(date)"'\n#\1\2\n\1 '"$ncpu"';/' /etc/nginx/nginx.conf
+sed -i.bak -r 's/^(worker_processes)(.*)$/# Commented out by '"$ME"' on '"$(date)"'\n#\1\2\n\1 '"$ncpu"';/' "$confPath"
 
 echo "$ME: Set NGINX worker_processes to $ncpu";
