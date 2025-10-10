@@ -6,7 +6,7 @@ test -n "${TEST_MODE:-}" && exit 0
 ME=$(basename "$0")
 
 case "${NGINX_AUTO_WEBP:-}" in
-1 | true | yes | Yes | on | ON | True | TRUE)
+1 | on | true | yes | ON | On | True | TRUE | Yes | YES)
   echo "$ME: Enable auto WebP config"
   # keep the file
   ;;

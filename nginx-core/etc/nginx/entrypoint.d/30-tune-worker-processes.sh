@@ -7,7 +7,7 @@ ME=$(basename "$0")
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 case "${NGINX_PROCESSES_AUTOTUNE:-}" in
-1 | true | yes | Yes | on | ON | True | TRUE)
+1 | on | true | yes | ON | On | True | TRUE | Yes | YES)
   echo "$ME: Auto-tuning NGINX worker processes based on system resources"
   ;;
 *)

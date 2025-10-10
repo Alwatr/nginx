@@ -6,7 +6,7 @@ test -n "${TEST_MODE:-}" && exit 0
 ME=$(basename "$0")
 
 case "${NGINX_CORS_ENABLE:-}" in
-1 | true | yes | Yes | on | ON | True | TRUE)
+1 | on | true | yes | ON | On | True | TRUE | Yes | YES)
   echo "$ME: Enable CORS config"
   # keep the file
   ;;

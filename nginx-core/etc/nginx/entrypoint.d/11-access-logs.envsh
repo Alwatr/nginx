@@ -8,7 +8,7 @@ fi
 echo "$ME: Generate access log configuration from NGINX_ENABLE_ACCESS_LOG"
 
 case "${NGINX_ENABLE_ACCESS_LOG:-}" in
-1 | true | yes | Yes | on | ON | True | TRUE)
+1 | on | true | yes | ON | On | True | TRUE | Yes | YES)
   NGINX_ACCESS_LOG="/var/log/nginx/access.log json"
   ;;
 *)

@@ -5,7 +5,7 @@ set -eu
 ME=$(basename "$0")
 
 case "${NGINX_DISALLOW_ROBOTS:-}" in
-1 | true | yes | Yes | on | ON | True | TRUE)
+1 | on | true | yes | ON | On | True | TRUE | Yes | YES)
   echo "$ME: Replace robots.txt to disallow all robots"
   cp -afv /default-data/robots.txt $NGINX_DOCUMENT_ROOT/
   ;;
