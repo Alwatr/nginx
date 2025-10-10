@@ -1,3 +1,4 @@
 *
 !etc/nginx/
 !default-data/
+!tools/
