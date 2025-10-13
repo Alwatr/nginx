@@ -49,10 +49,8 @@ find "$NGINX_DOCUMENT_ROOT" -type f \
   -o -name "*.gif" -o -name "*.tiff" -o -name "*.tif" \) \
   ! -name "*.webp" |
   while read -r file; do
-    if [ ! -f "${file}.webp" ] || [ "$file" -nt "${file}.webp" ]; then
-      echoStep "Compressing: $file"
-      cwebp -mt -m 6 -af -q "$WEBP_QUALITY" -v "$file" -o "${file}.webp"
-    fi
+		echoStep "Compressing: $file"
+		cwebp -mt -m 6 -af -q "$WEBP_QUALITY" -v "$file" -o "${file}.webp"
   done
 
 echoDone "Compression complete!"

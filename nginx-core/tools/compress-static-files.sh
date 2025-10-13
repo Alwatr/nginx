@@ -50,10 +50,8 @@ find "$NGINX_DOCUMENT_ROOT" -type f \
   -o -name "*.rss" -o -name "*.atom" \) \
   ! -name "*.br" ! -name "*.gz" |
   while read -r file; do
-    if [ ! -f "${file}.br" ] || [ "$file" -nt "${file}.br" ]; then
-      echoStep "Compressing: $file"
-      brotli --best --squash --verbose --lgwin=0 --keep --suffix=.br "$file"
-    fi
+		echoStep "Compressing: $file"
+		brotli --best --squash --verbose --lgwin=0 --keep --suffix=.br "$file"
   done
 
 echoDone "Compression complete!"
