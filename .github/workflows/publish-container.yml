@@ -32,10 +32,10 @@ jobs:
         include:
           - path: nginx
           - path: nginx-core
-          - path: nginx-cdn
-          - path: nginx-pwa
           - path: nginx-ws
+          - path: nginx-cdn
           - path: nginx-json
+          - path: nginx-pwa
 
     permissions:
       contents: read
