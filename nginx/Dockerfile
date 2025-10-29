@@ -1,4 +1,4 @@
-FROM docker.io/library/nginx:1.29.2-alpine-otel AS build
+FROM docker.io/library/nginx:1.29.3-alpine-otel AS build
 
 # NGINX_VERSION is available from the base image
 RUN --mount=type=cache,target=/var/cache/apk \
@@ -57,7 +57,7 @@ RUN --mount=type=cache,target=/var/cache/apk \
     /tmp/modules/;
 
 # Final stage
-FROM docker.io/library/nginx:1.29.2-alpine-otel
+FROM docker.io/library/nginx:1.29.3-alpine-otel
 
 # Clean default configurations and files
 RUN rm -rfv /docker-entrypoint* /etc/nginx/conf.d/* /etc/nginx/nginx.conf /var/www/html /usr/share/nginx/html /data
