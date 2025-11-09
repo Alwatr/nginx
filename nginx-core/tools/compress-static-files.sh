@@ -51,9 +51,9 @@ find "$NGINX_DOCUMENT_ROOT" -type f \
   ! -name "*.br" ! -name "*.gz" |
   while read -r file; do
 		echoStep "Compressing: $file"
-		brotli --best --squash --verbose --lgwin=0 --keep --suffix=.br "$file"
+		brotli --best --squash --verbose --lgwin=0 --keep --suffix=.br --force "$file"
   done
 
 echoDone "Compression complete!"
 
-echo "To serve pre-compressed files, ensure \$NGINX_BROTLI_STATIC is set to 'on' (currently set to '${NGINX_BROTLI_STATIC:-off}')."
+echoColor 3 "To serve pre-compressed files, ensure \$NGINX_BROTLI_STATIC is set to 'on' (currently set to '${NGINX_BROTLI_STATIC:-off}')."
