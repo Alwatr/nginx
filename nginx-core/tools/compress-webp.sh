@@ -3,7 +3,7 @@
 set -eu
 
 # Set quality from the first argument, or default to 82
-WEBP_QUALITY=${1:-82};
+WEBP_QUALITY=${1:-78};
 
 echoColor() {
   # 1: red, 2: green, 3: yellow, 4: blue, 5: purple, 6: cyan, 7: light gray
@@ -50,9 +50,9 @@ find "$NGINX_DOCUMENT_ROOT" -type f \
   ! -name "*.webp" |
   while read -r file; do
 		echoStep "Compressing: $file"
-		cwebp -mt -m 6 -af -q "$WEBP_QUALITY" -v "$file" -o "${file}.webp"
+		cwebp -mt -m 6 -af -v -q "$WEBP_QUALITY" -v "$file" -o "${file}.webp"
   done
 
 echoDone "Compression complete!"
 
-echo "To serve pre-compressed files, ensure \$NGINX_AUTO_WEBP is set to 'on' (currently set to '${NGINX_AUTO_WEBP:-off}')."
+echoColor 3 "To serve pre-compressed files, ensure \$NGINX_AUTO_WEBP is set to 'on' (currently set to '${NGINX_AUTO_WEBP:-off}')."
