@@ -1,3 +1,5 @@
+absolute_redirect off;
+
 map $request_uri $redirect_uri {
   include /etc/nginx/conf.d/redirect.d/*.map;
 }
