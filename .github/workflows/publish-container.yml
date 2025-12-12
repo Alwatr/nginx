@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: ⤵️ Checkout repository
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v6.0.1
 
       - name: ❔ Check Container files changed
         id: file_change
@@ -65,7 +65,7 @@ jobs:
 
       - name: 🏗 Cache Docker Layers
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
-        uses: actions/cache@v4.3.0
+        uses: actions/cache@v5.0.0
         with:
           path: /tmp/.buildx-cache
           key: container/${{ matrix.path }}
@@ -88,7 +88,7 @@ jobs:
       - name: 🏗 Extract metadata
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
         id: meta
-        uses: docker/metadata-action@v5.9.0
+        uses: docker/metadata-action@v5.10.0
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           images: |
