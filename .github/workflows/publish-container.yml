@@ -57,7 +57,7 @@ jobs:
 
       - name: 🏗 Install cosign
         if: ${{ github.event_name != 'pull_request' && steps.file_change.outputs.container_folder != 'false' }}
-        uses: sigstore/cosign-installer@v4
+        uses: sigstore/cosign-installer@v4.1.1
 
       - name: 🏗 Setup Docker Buildx
         if: ${{ steps.file_change.outputs.container_folder != 'false' }}
