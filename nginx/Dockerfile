@@ -1,4 +1,4 @@
-FROM docker.io/library/nginx:1.29.7-alpine-otel AS build
+FROM docker.io/library/nginx:1.31.1-alpine-otel AS build
 
 # NGINX_VERSION is available from the base image
 RUN --mount=type=cache,target=/var/cache/apk \
