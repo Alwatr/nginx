@@ -55,7 +55,7 @@ find "${NGINX_DOCUMENT_ROOT}" -type f \
   -o -name "*.woff" -o -name "*.ttf" -o -name "*.otf" -o -name "*.eot" \
   -o -name "*.rss" -o -name "*.atom" \) \
   ! -name "*.br" ! -name "*.gz" |
-  while read -r file; do
+  while IFS= read -r file; do
 		echoStep "Compressing: ${file}"
 		brotli --best --squash --verbose --lgwin=0 --keep --suffix=.br --force "${file}"
   done
