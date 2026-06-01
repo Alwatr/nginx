@@ -1,6 +1,6 @@
 FROM ghcr.io/alwatr/nginx:4.9.0
 
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl libwebp-tools brotli
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --start-interval=1s --retries=3 CMD curl -fso /dev/null http://localhost/server-info || exit 1
 
 WORKDIR /data
