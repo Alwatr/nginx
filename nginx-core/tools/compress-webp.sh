@@ -6,20 +6,26 @@ set -eu
 WEBP_QUALITY=${1:-78};
 
 echoColor() {
-  # 1: red, 2: green, 3: yellow, 4: blue, 5: purple, 6: cyan, 7: light gray
-  printf "\x1b[0;3$1m$2\x1b[0m"
+  # 0: gray, 1: red, 2: green, 3: yellow, 4: blue, 5: purple, 6: cyan, 7: white
+  local colorCode="\x1b[0;3${1:-7}m"
+  local message="${2:-}"
+  local reset="\x1b[0m"
+  printf "${colorCode}${message}${reset}"
 }
 
 echoStep() {
-  echoColor 6 "\n🔸 $1\n\n"
+  local message="${1:-}"
+  echoColor 6 "\n🔸 ${message}\n\n"
 }
 
 echoDone() {
-  echoColor 2 "\n✅ ${1:-'Done ;)'}\n\n"
+  local message=${1:-'Done ;)'}
+  echoColor 2 "\n✅ ${message}\n\n"
 }
 
 echoError() {
-  echoColor 1 "❌ ${1:-'Error :('}\n\n"
+  local message=${1:-'Error :('}
+  echoColor 1 "❌ ${message}\n\n"
 }
 
 # Compress all images in NGINX_DOCUMENT_ROOT recursively to WebP
@@ -30,8 +36,8 @@ if [ -z "${NGINX_DOCUMENT_ROOT:-}" ]; then
   exit 1
 fi
 
-if [ ! -d "$NGINX_DOCUMENT_ROOT" ]; then
-  echoError "Error: Directory $NGINX_DOCUMENT_ROOT does not exist"
+if [ ! -d "${NGINX_DOCUMENT_ROOT}" ]; then
+  echoError "Error: Directory ${NGINX_DOCUMENT_ROOT} does not exist"
   exit 1
 fi
 
@@ -40,19 +46,19 @@ if ! command -v cwebp >/dev/null 2>&1; then
   apk add --no-cache libwebp-tools
 fi
 
-echoStep "Compressing images in $NGINX_DOCUMENT_ROOT with WebP..."
+echoStep "Compressing images in ${NGINX_DOCUMENT_ROOT} with WebP..."
 
 # Find and compress image files.
 # The loop below handles skipping already compressed files.
-find "$NGINX_DOCUMENT_ROOT" -type f \
+find "${NGINX_DOCUMENT_ROOT}" -type f \
   \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" \
   -o -name "*.gif" -o -name "*.tiff" -o -name "*.tif" \) \
   ! -name "*.webp" |
   while read -r file; do
-		echoStep "Compressing: $file"
-		cwebp -mt -m 6 -af -v -q "$WEBP_QUALITY" -v "$file" -o "${file}.webp"
+		echoStep "Compressing: ${file}"
+		cwebp -mt -m 6 -af -v -q "${WEBP_QUALITY}" -v "${file}" -o "${file}.webp"
   done
 
-echoDone "Compression complete!"
+echoDone 'Compression complete!'
 
-echoColor 3 "To serve pre-compressed files, ensure \$NGINX_AUTO_WEBP is set to 'on' (currently set to '${NGINX_AUTO_WEBP:-off}')."
+echoColor 3 "Ensure \$NGINX_AUTO_WEBP is set to 'on' (currently set to '${NGINX_AUTO_WEBP:-off}')."
