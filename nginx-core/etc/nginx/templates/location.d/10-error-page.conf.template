@@ -4,4 +4,7 @@ location = /_error.html {
   ssi on;
   internal;
   auth_basic off;
+  # Never serve a pre-compressed (.br/.gz) variant here: that bypasses the SSI body filter and leaves the <!--# echo/if --> directives unprocessed.
+  gzip_static off;
+  brotli_static off;
 }
